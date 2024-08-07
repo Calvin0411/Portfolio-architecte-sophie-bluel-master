@@ -125,14 +125,14 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
-.div-container {
+.categoriesContainer {
 	width: 50%;
 	display: flex;
 	justify-content: space-evenly;
 	margin: 35px auto;
 }
 
-.div-container >*{
+.categoriesContainer >*{
 	padding: 10px 20px;
 	border: 1px solid #1D6154;
 	border-radius: 25px;
@@ -140,7 +140,7 @@ li:hover {
 	color: #1D6154;
 	cursor: pointer;
 }
-.div-container >*:hover{
+.categoriesContainer >*:hover{
 	background-color: #1D6154;
 	color: white;
 }
