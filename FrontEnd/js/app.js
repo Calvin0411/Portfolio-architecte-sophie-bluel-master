@@ -1,12 +1,14 @@
 //code pour la galerie, filtre et login
 
+console.log("Hello Worlds")
+
 async function getWorks (){
     const url = "http://localhost:5678/api/works";
     try {
         const response = await fetch(url);
         const json = await response.json();
         console.log(json);
-        worksData = json; // Stocke les données récupérées dans la variable globale worksData
+        worksData = json; // Stock les données récupérées dans la variable  worksData
         displayWorks(json);
         } catch (error) {
             console.error(error.message);
@@ -15,11 +17,11 @@ async function getWorks (){
 
 getWorks();
 
-let worksData = [];  // Variable globale pour stocker les données des travaux
+let worksData = [];  // Variable  pour stocker les données des figures
 
-// Fonction pour créer soit ajouter l'élément figure dans la galerie ansi que ça description
+// Fonction pour  ajouter les figure dans la galerie avec image et  description
 function displayWorks(data) {
-    const gallery = document.querySelector(".gallery");  // Sélectionne l'élément de la galerie dans le DOM
+    const gallery = document.querySelector(".gallery");  
     gallery.innerHTML = "";  // Efface le contenu précédent de la galerie
     data.forEach(work => {  // Pour chaque travail dans les données fournies
         const figure = document.createElement("figure");  // Crée un nouvel élément figure
@@ -29,50 +31,55 @@ function displayWorks(data) {
     });
 }
 
-//récupération de mon tableau de catégories
+//fonction pour récupérer  mon tableau de catégories et création de monn filtre
 
 async function getCategories() {
-    const url = "http://localhost:5678/api/categories";  // URL de l'API pour obtenir les catégories
+    const url = "http://localhost:5678/api/categories"; 
     try {
-        const response = await fetch(url);  // Effectue une requête fetch à l'API
-        const json = await response.json();  // Convertit la réponse en JSON
-        console.log(json);  // Affiche les données dans la console pour confirmation
+        const response = await fetch(url);  
+        const json = await response.json();  // Conversion en JSON
+        console.log(json);  
         displayCategories(json);  // Passe l'ensemble des catégories à displayCategories
     } catch (error) {
-        console.error(error.message);  // Affiche un message d'erreur en cas de problème
+        console.error(error.message);  
     }
 }
 
 
 getCategories();
 
+//récupération et créations de mes boutons filtres
+
 function displayCategories(data) {
-    const categoriesContainer = document.querySelector(".categoriesContainer");  // Sélectionne l'élément du conteneur des catégories dans le DOM
+    const categoriesContainer = document.querySelector(".categoriesContainer");  
 
-    // Ajout du bouton "Tous"
-    const allButton = document.createElement("div");  // Crée un nouvel élément div pour le bouton "Tous"
-    allButton.textContent = "Tous";  // Définit le texte du bouton à "Tous"
-    allButton.dataset.id = "all";  // Ajoute un attribut data-id avec la valeur "all" pour le bouton
-    allButton.addEventListener("click", () => displayWorks(worksData));  // Ajoute un événement de clic pour afficher tous les travaux
-    categoriesContainer.appendChild(allButton);  // Ajoute le bouton "Tous" au conteneur des catégories
+    // Ajout du bouton tous
+    const allButton = document.createElement("div");  // Crée une div pour le bouton 
+    allButton.textContent = "Tous";  // nom du bouton
+    allButton.dataset.id = "all";  // Ajoute attribut data-id avec la valeur "all" pour le bouton
+    allButton.addEventListener("click", () => displayWorks(worksData));  // écouteur d'évènement
+    categoriesContainer.appendChild(allButton);  // Ajoute le bouton tous
 
-    // Ajout des boutons pour chaque catégorie
-    data.forEach(category => {  // Pour chaque catégorie dans les données fournies
-        const div = document.createElement("div");  // Crée un nouvel élément div pour la catégorie
-        div.textContent = category.name;  // Définit le texte du div à la catégorie
-        div.dataset.id = category.id;  // Ajoute un attribut data-id avec l'ID de la catégorie
-        div.addEventListener("click", () => filterWorksByCategory(category.id));  // Ajoute un événement de clic pour filtrer les travaux par cette catégorie
-        categoriesContainer.appendChild(div);  // Ajoute le div de la catégorie au conteneur des catégories
+    // Ajout des boutons pour le filtre
+    data.forEach(category => {  
+        const displayfilters = document.createElement("div");  // Crée une div pour la catégorie filtre
+        displayfilters.textContent = category.name;  // Définit le texte du div à la catégorie
+        displayfilters.dataset.id = category.id;  // Ajoute un attribut data-id avec l'ID de la catégorie
+        displayfilters.addEventListener("click", () => filterWorksByCategory(category.id));  // pour filtrer les travaux par cette catégorie au click 
+        categoriesContainer.appendChild(displayfilters);  // Ajoute la div pour la catégories
     });
+    
 }
 
-
+displayCategories();
 
 function filterWorksByCategory(categoryId) {
-    if (categoryId === "all") {  // Vérifie si l'ID de la catégorie est "all"
+    if (categoryId === "all") {  //  si l'ID de la catégorie est "all", alors
         displayWorks(worksData);  // Affiche tous les travaux
     } else {
-        const filteredWorks = worksData.filter(work => work.categoryId == categoryId);  // Filtre les travaux en fonction de l'ID de la catégorie
-        displayWorks(filteredWorks);  // Affiche les travaux filtrés
+        const filteredWorks = worksData.filter(work => work.categoryId == categoryId);  // Filtre les figure en fonction de l'ID 
+        displayWorks(filteredWorks);  // Affiche les figures filtrés
     }
 }
+
+filterWorksByCategory();

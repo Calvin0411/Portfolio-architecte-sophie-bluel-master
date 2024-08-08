@@ -46,6 +46,22 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+a {
+	text-decoration: none;
+	color: black;
+	font: Work Sans;
+}
+
+a:hover {
+	color: #B1663C;
+}
+
+.mdp-oublier {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
 /** end reset css**/
 body {
 	max-width: 1140px;
@@ -128,6 +144,8 @@ li:hover {
 .categoriesContainer {
 	width: 50%;
 	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
 	justify-content: space-evenly;
 	margin: 35px auto;
 }
