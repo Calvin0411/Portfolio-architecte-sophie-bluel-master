@@ -1,54 +1,48 @@
-document.addEventListener("DOMContentLoaded", function() {// Attends le chargement de mon DOM
-    const email = document.querySelector("#email");
-    const password = document.querySelector("#password");
-    const form = document.querySelector ("form");
-    console.log(email, password,form );  
-    const messageErreur = document.querySelector (".login p");
-});
+// Fonction de connexion
+function login() {
+    
+    let mailuser = document.querySelector('#email').value;
+    let password = document.querySelector('#password').value;
 
-async function getUsers() {
-    const url = "http://localhost:5678/api/users/login";
-    try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const json = await response.json();
-        console.log(json); // Affiche les données dans la console pour confirmation
-    } catch (error) {
-        console.error('Erreur:', error.message);
-    }
-}
+    
+    let data = {
+        email: mailuser,
+        password: password,  
+    };
 
-getUsers();
-
-//fonction pour se connecter
-
-async function login() {
-    const users = await getUsers();
-    console.log(users);
-    form.addEventListener ("submit", (e) => {
-        e.preventDefault();
-        const userEmail = email.value;
-        const userPwd = password.value;
-        console.log(userEmail, userPwd);
-        users.forEach ((user)=> {
-
-            // vérification si bon user name mot de passe
-            if (
-                user.email == userEmail &&
-                user.password == userPwd &&
-                user.admin == true
-            ) {
-                window.sessionStorage.loged = true;
-                window.location.href = "../index.html";
-                console.log(connecté);
-            } else {
-                //non reconnu
-                
-            }
-        })
+    // Envoie la requête de connexion
+    fetch("http://localhost:5678/api/users/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data) 
     })
+    .then((response) => {
+       
+        if (!response.ok) {
+            // Affiche un message d'erreur si la réponse n'est pas correcte
+            console.error('Erreur de connexion');
+            
+        } else {
+            // Traite la réponse JSON
+            return response.json();  // Nécessaire pour obtenir les données de l'utilisateur
+        }
+    })
+    .then((dataUser) => {
+        // Affiche les données de l'utilisateur et stocke le token
+        console.log(dataUser);
+        localStorage.setItem('token', dataUser.token);  // Sauvegarde le token dans le localStorage
+        window.location.href = "../index.html";  // Redirige vers la page d'accueil après connexion
+    })
+    .catch((error) => {
+        // Gère les erreurs de réseau ou de traitement
+        console.error('Erreur:', error);
+    });
 }
 
-login();
+// Ajoute un écouteur d'événements pour le formulaire de connexion
+document.querySelector('#login form').addEventListener('submit', function (e) {
+    e.preventDefault();  // Empêche le comportement par défaut du formulaire (rechargement de la page)
+    login();  // Appelle la fonction de connexion
+});

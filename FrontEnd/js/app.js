@@ -73,6 +73,8 @@ function displayCategories(data) {
 
 displayCategories();
 
+//fonction pour le fonctionnement de mon filtre
+
 function filterWorksByCategory(categoryId) {
     if (categoryId === "all") {  //  si l'ID de la catégorie est "all", alors
         displayWorks(worksData);  // Affiche tous les travaux
