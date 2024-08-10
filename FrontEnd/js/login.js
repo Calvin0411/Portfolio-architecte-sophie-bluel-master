@@ -2,12 +2,12 @@
 function login() {
     
     let mailuser = document.querySelector('#email').value;
-    let password = document.querySelector('#password').value;
+    let passworduser = document.querySelector('#password').value;
 
     
     let data = {
         email: mailuser,
-        password: password,  
+        password: passworduser,  
     };
 
     // Envoie la requête de connexion
