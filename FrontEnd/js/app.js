@@ -17,6 +17,8 @@ async function getWorks (){
 
 getWorks();
 
+
+
 let worksData = [];  // Variable  pour stocker les données des figures
 
 // Fonction pour  ajouter les figure dans la galerie avec image et  description
@@ -85,3 +87,5 @@ function filterWorksByCategory(categoryId) {
 }
 
 filterWorksByCategory();
+
+
