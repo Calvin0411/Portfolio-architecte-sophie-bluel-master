@@ -4,7 +4,7 @@ function login() {
     let mailuser = document.querySelector('#email').value;
     let passworduser = document.querySelector('#password').value;
 
-    
+    let errorMessage = document.querySelector('.login');
     let data = {
         email: mailuser,
         password: passworduser,  
@@ -22,7 +22,9 @@ function login() {
        
         if (!response.ok) {
             // Affiche un message d'erreur si la réponse n'est pas correcte
-            console.error('Erreur de connexion');
+            errorMessage.textContent = "Erreur: Email ou mot de passe incorrect.";
+            errorMessage.style.color = "red"; // Change la couleur du texte pour le rendre visible
+            throw new Error('Erreur de connexion');
             
         } else {
             // Traite la réponse JSON
