@@ -1,27 +1,42 @@
-//code pour la galerie, filtre et login
+// Fonction pour vérifier la connexion de l'utilisateur
+function checkUserLogin() {
+    // Récupère le token du localStorage
+    const token = localStorage.getItem('token');
+    // Sélectionne la div "Mode Édition"
+    const editModeDiv = document.querySelector('.banner-connexion');
 
-console.log("Hello Worlds")
+    // Si le token est présent, affiche la div, sinon la cache
+    if (token) {
+        editModeDiv.classList.remove('hidden');
+    } else {
+        editModeDiv.classList.add('hidden');
+    }
+}
 
-async function getWorks (){
+// Appelle la fonction au chargement de la page
+document.addEventListener('DOMContentLoaded', checkUserLogin);
+
+// Code pour la galerie, filtre et login (ajoute ou garde ce qui est nécessaire pour ton application)
+
+console.log("Hello Worlds");
+
+async function getWorks() {
     const url = "http://localhost:5678/api/works";
     try {
         const response = await fetch(url);
         const json = await response.json();
         console.log(json);
-        worksData = json; // Stock les données récupérées dans la variable  worksData
+        worksData = json; // Stocke les données récupérées dans la variable worksData
         displayWorks(json);
-        } catch (error) {
-            console.error(error.message);
+    } catch (error) {
+        console.error(error.message);
     }
 }
 
 getWorks();
 
+let worksData = [];  // Variable pour stocker les données des travaux
 
-
-let worksData = [];  // Variable  pour stocker les données des figures
-
-// Fonction pour  ajouter les figure dans la galerie avec image et  description
 function displayWorks(data) {
     const gallery = document.querySelector(".gallery");  
     gallery.innerHTML = "";  // Efface le contenu précédent de la galerie
@@ -32,8 +47,6 @@ function displayWorks(data) {
         gallery.appendChild(figure);  // Ajoute la figure à la galerie
     });
 }
-
-//fonction pour récupérer  mon tableau de catégories et création de monn filtre
 
 async function getCategories() {
     const url = "http://localhost:5678/api/categories"; 
@@ -47,10 +60,7 @@ async function getCategories() {
     }
 }
 
-
 getCategories();
-
-//récupération et créations de mes boutons filtres
 
 function displayCategories(data) {
     const categoriesContainer = document.querySelector(".categoriesContainer");  
@@ -68,24 +78,42 @@ function displayCategories(data) {
         displayfilters.textContent = category.name;  // Définit le texte du div à la catégorie
         displayfilters.dataset.id = category.id;  // Ajoute un attribut data-id avec l'ID de la catégorie
         displayfilters.addEventListener("click", () => filterWorksByCategory(category.id));  // pour filtrer les travaux par cette catégorie au click 
-        categoriesContainer.appendChild(displayfilters);  // Ajoute la div pour la catégories
+        categoriesContainer.appendChild(displayfilters);  // Ajoute la div pour la catégorie
     });
-    
 }
 
-displayCategories();
-
-//fonction pour le fonctionnement de mon filtre
-
 function filterWorksByCategory(categoryId) {
-    if (categoryId === "all") {  //  si l'ID de la catégorie est "all", alors
+    if (categoryId === "all") {  // si l'ID de la catégorie est "all", alors
         displayWorks(worksData);  // Affiche tous les travaux
     } else {
-        const filteredWorks = worksData.filter(work => work.categoryId == categoryId);  // Filtre les figure en fonction de l'ID 
-        displayWorks(filteredWorks);  // Affiche les figures filtrés
+        const filteredWorks = worksData.filter(work => work.categoryId == categoryId);  // Filtre les travaux en fonction de l'ID 
+        displayWorks(filteredWorks);  // Affiche les travaux filtrés
     }
 }
 
 filterWorksByCategory();
 
+document.addEventListener('DOMContentLoaded', () => {
+    checkUserLogin();
+    
+    const logoutButton = document.querySelector('#logout');
+    if (logoutButton) {
+        logoutButton.addEventListener('click', logout);
+    }
+});
 
+function checkUserLogin() {
+    const token = localStorage.getItem('token');
+    const editModeDiv = document.querySelector('.banner-connexion');
+
+    if (token) {
+        editModeDiv.classList.remove('hidden');
+    } else {
+        editModeDiv.classList.add('hidden');
+    }
+}
+
+function logout() {
+    localStorage.removeItem('token'); // Supprime le token
+    window.location.href = '/FrontEnd/login.html'; // Redirige vers la page de connexion
+}
