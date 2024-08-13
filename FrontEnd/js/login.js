@@ -1,46 +1,41 @@
 // Fonction de connexion
-function login() {
+async function login() {
     
     let mailuser = document.querySelector('#email').value;
     let passworduser = document.querySelector('#password').value;
-
     let errorMessage = document.querySelector('.login');
+
     let data = {
         email: mailuser,
-        password: passworduser,  
+        password: passworduser,
     };
 
     // Envoie la requête de connexion
-    fetch("http://localhost:5678/api/users/login", {
-        method: "POST",
+    try {
+        const response = await fetch("http://localhost:5678/api/users/login", {
+            method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(data) 
     })
-    .then((response) => {
-       
+
+    const dataUser = await response.json();
+
         if (!response.ok) {
             // Affiche un message d'erreur si la réponse n'est pas correcte
-            errorMessage.textContent = "Erreur: Email ou mot de passe incorrect.";
+            errorMessage.textContent = dataUser.message || "Erreur: Email ou mot de passe incorrect.";
             errorMessage.style.color = "red"; // Change la couleur du texte pour le rendre visible
-            throw new Error('Erreur de connexion');
-            
+            throw new Error(dataUser.message || 'Erreur de connexion');
         } else {
-            // Traite la réponse JSON
-            return response.json();  // Nécessaire pour obtenir les données de l'utilisateur
+            // Affiche les données de l'utilisateur et stocke le token
+            localStorage.setItem('token', dataUser.token);  // Sauvegarde le token dans le localStorage
+            window.location.href = "/FrontEnd/index.html";  // Redirige vers la page d'accueil après connexion
         }
-    })
-    .then((dataUser) => {
-        // Affiche les données de l'utilisateur et stocke le token
-        console.log(dataUser);
-        localStorage.setItem('token', dataUser.token);  // Sauvegarde le token dans le localStorage
-        window.location.href = "../index.html";  // Redirige vers la page d'accueil après connexion
-    })
-    .catch((error) => {
+    } catch (error) {
         // Gère les erreurs de réseau ou de traitement
         console.error('Erreur:', error);
-    });
+    }
 }
 
 // Ajoute un écouteur d'événements pour le formulaire de connexion
