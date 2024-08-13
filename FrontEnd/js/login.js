@@ -10,31 +10,39 @@ async function login() {
         password: passworduser,
     };
 
-    // Envoie la requête de connexion
     try {
         const response = await fetch("http://localhost:5678/api/users/login", {
             method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data) 
-    })
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data) 
+        });
 
-    const dataUser = await response.json();
+        const dataUser = await response.json();
 
-        if (!response.ok) {
-            // Affiche un message d'erreur si la réponse n'est pas correcte
-            errorMessage.textContent = dataUser.message || "Erreur: Email ou mot de passe incorrect.";
-            errorMessage.style.color = "red"; // Change la couleur du texte pour le rendre visible
-            
+        if (response.status === 401) {
+            // Erreur 401: Identifiants incorrects
+            errorMessage.textContent = "Erreur: Email ou mot de passe incorrect.";
+            errorMessage.style.color = "red";
+        } else if (response.status === 404) {
+            // Erreur 404: Ressource non trouvée
+            errorMessage.textContent = "Erreur: Ressource non trouvée. Veuillez vérifier l'URL de l'API.";
+            errorMessage.style.color = "red";
+        } else if (!response.ok) {
+            // Autres erreurs
+            errorMessage.textContent = dataUser.message || "Erreur de connexion.";
+            errorMessage.style.color = "red";
         } else {
-            // Affiche les données de l'utilisateur et stocke le token
+            // Connexion réussie
             localStorage.setItem('token', dataUser.token);  // Sauvegarde le token dans le localStorage
             window.location.href = "/FrontEnd/index.html";  // Redirige vers la page d'accueil après connexion
         }
     } catch (error) {
         // Gère les erreurs de réseau ou de traitement
         console.error('Erreur:', error);
+        errorMessage.textContent = "Erreur de réseau. Veuillez réessayer.";
+        errorMessage.style.color = "red";
     }
 }
 
