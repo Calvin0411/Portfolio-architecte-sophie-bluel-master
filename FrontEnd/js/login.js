@@ -26,7 +26,7 @@ async function login() {
             // Affiche un message d'erreur si la réponse n'est pas correcte
             errorMessage.textContent = dataUser.message || "Erreur: Email ou mot de passe incorrect.";
             errorMessage.style.color = "red"; // Change la couleur du texte pour le rendre visible
-            throw new Error(dataUser.message || 'Erreur de connexion');
+            
         } else {
             // Affiche les données de l'utilisateur et stocke le token
             localStorage.setItem('token', dataUser.token);  // Sauvegarde le token dans le localStorage
