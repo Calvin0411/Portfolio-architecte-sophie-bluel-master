@@ -102,18 +102,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Fonction pour vérifier la connexion de l'utilisateur
 function checkUserLogin() {
     const token = localStorage.getItem('token');
     const editModeDiv = document.querySelector('.banner-connexion');
+    const authButton = document.querySelector('#auth-button');
 
     if (token) {
-        editModeDiv.classList.remove('hidden');
+        authButton.textContent = "log out";
+        editModeDiv.classList.remove('hidden'); // Affiche la bannière "Mode édition"
     } else {
-        editModeDiv.classList.add('hidden');
+        authButton.textContent = "login";
+        editModeDiv.classList.add('hidden'); // Cache la bannière
     }
 }
 
+// Fonction pour gérer la déconnexion
 function logout() {
-    localStorage.removeItem('token'); // Supprime le token
-    window.location.href = '/FrontEnd/login.html'; // Redirige vers la page de connexion
+    localStorage.removeItem('token');  // Supprime le token
+    checkUserLogin();  // Met à jour l'interface après déconnexion
+    window.location.href = '/FrontEnd/index.html';  // Redirige vers la page d'accueil
 }
+
+// Appelle la fonction au chargement de la page
+document.addEventListener('DOMContentLoaded', () => {
+    checkUserLogin();
+
+    const authButton = document.querySelector('#auth-button');
+    authButton.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        if (localStorage.getItem('token')) {
+            logout();
+        } else {
+            window.location.href = '/FrontEnd/login.html';
+        }
+    });
+});
