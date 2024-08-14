@@ -42,6 +42,9 @@
 	</section>
 	<section id="portfolio">
 		<h2>Mes Projets</h2>
+		<button id="edit-button" class="hidden" style="margin-left: 10px;">
+			<i class="fa-solid fa-pen-to-square"></i> Modifier
+		</button>
 		<div class="categoriesContainer"></div>
 		<div class="gallery">
 		</div>
@@ -60,7 +63,6 @@
 		</form>
 	</section>
 </main>
-
 <footer>
 	<nav>
 		<ul>
@@ -68,5 +70,13 @@
 		</ul>
 	</nav>
 </footer>
+<div class="containerModals hidden" id="modal-container">
+    <div class="modalworks">
+        <span id="close-modal"><i class="fa-solid fa-xmark"></i></span>
+        <h3>Galerie photo</h3>
+        <div class="WorksModals"></div>
+        <button>Ajouter une photo</button>
+    </div>
+</div>
 </body>
 </html>

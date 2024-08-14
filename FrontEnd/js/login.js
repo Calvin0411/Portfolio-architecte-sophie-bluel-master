@@ -51,3 +51,7 @@ document.querySelector('#login form').addEventListener('submit', function (e) {
     e.preventDefault();  // Empêche le comportement par défaut du formulaire (rechargement de la page)
     login();  // Appelle la fonction de connexion
 });
+
+
+//modale afin de gérer les figures après connexion 
+

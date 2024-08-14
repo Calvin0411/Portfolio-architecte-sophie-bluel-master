@@ -106,14 +106,17 @@ document.addEventListener('DOMContentLoaded', () => {
 function checkUserLogin() {
     const token = localStorage.getItem('token');
     const editModeDiv = document.querySelector('.banner-connexion');
-    const authButton = document.querySelector('#auth-button');
+    const editButton = document.getElementById('edit-button');
+    const authButton = document.getElementById('auth-button');
 
     if (token) {
         authButton.textContent = "log out";
         editModeDiv.classList.remove('hidden'); // Affiche la bannière "Mode édition"
+        editButton.classList.remove('hidden'); // Affiche le bouton "Modifier"
     } else {
         authButton.textContent = "login";
         editModeDiv.classList.add('hidden'); // Cache la bannière
+        editButton.classList.add('hidden'); // Cache le bouton "Modifier"
     }
 }
 
@@ -124,11 +127,16 @@ function logout() {
     window.location.href = '/FrontEnd/index.html';  // Redirige vers la page d'accueil
 }
 
-// Appelle la fonction au chargement de la page
+// Initialisation au chargement de la page
 document.addEventListener('DOMContentLoaded', () => {
     checkUserLogin();
 
     const authButton = document.querySelector('#auth-button');
+    const editButton = document.getElementById('edit-button');
+    const modalContainer = document.getElementById('modal-container');
+    const closeModal = document.getElementById('close-modal');
+
+    // Gestion du bouton de connexion/déconnexion
     authButton.addEventListener('click', (e) => {
         e.preventDefault();
 
@@ -138,4 +146,15 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = '/FrontEnd/login.html';
         }
     });
+
+    // Affiche la modal quand on clique sur le bouton "Modifier"
+    editButton.addEventListener('click', () => {
+        modalContainer.classList.remove('hidden');
+    });
+
+    // Cache la modal quand on clique sur le bouton de fermeture
+    closeModal.addEventListener('click', () => {
+        modalContainer.classList.add('hidden');
+    });
 });
+
