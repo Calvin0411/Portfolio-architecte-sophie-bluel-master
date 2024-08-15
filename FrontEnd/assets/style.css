@@ -346,12 +346,10 @@ margin: auto;
 		color: #1D6154;
 		cursor: pointer;
 	}
-	.modalworks>*:hover{
-		background-color: #1D6154;
-		color: white;	
-	}
-	
-
+}
+.modalworks button:hover {
+    background-color: #1D6154; /* Changement de couleur de fond lors du survol */
+    color: white; /* Changement de couleur du texte lors du survol */
 }
 
 /*style bouton edit */
@@ -368,4 +366,5 @@ margin: auto;
     outline: none; 
     box-shadow: none; 
     background: none; 
+	cursor: pointer;
 }

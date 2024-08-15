@@ -16,7 +16,7 @@ function checkUserLogin() {
 // Appelle la fonction au chargement de la page
 document.addEventListener('DOMContentLoaded', checkUserLogin);
 
-// Code pour la galerie, filtre et login (ajoute ou garde ce qui est nécessaire pour ton application)
+// Code pour la galerie, filtre et login
 
 console.log("Hello Worlds");
 
@@ -110,7 +110,7 @@ function checkUserLogin() {
     const authButton = document.getElementById('auth-button');
 
     if (token) {
-        authButton.textContent = "log out";
+        authButton.textContent = "logout";
         editModeDiv.classList.remove('hidden'); // Affiche la bannière "Mode édition"
         editButton.classList.remove('hidden'); // Affiche le bouton "Modifier"
     } else {
@@ -161,4 +161,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Ajout nouveau travail dans la modale 
 
+async function addWork(data) {
+    try {
+        const response = await fetch("http://localhost:5678/api/works", {
+            method: "POST",  
+            headers: {
+                "Content-Type": "application/json",  
+                "Authorization": `Bearer ${localStorage.getItem('token')}`  
+            },
+            body: JSON.stringify(data)  // Convertit les données en chaîne JSON
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || "Erreur lors de l'ajout.");
+        }
+        const responseData = await response.json();
+        console.log('Succès:', responseData);
+    } catch (error) {
+        console.error('Erreur:', error);
+    }
+}
+// Fonction pour afficher les détails dans la modal
+async function addWork(data) {
+    try {
+        const response = await fetch("http://localhost:5678/api/works", {
+            method: "POST",  
+            headers: {
+                "Content-Type": "application/json",  
+                "Authorization": `Bearer ${localStorage.getItem('token')}`  
+            },
+            body: JSON.stringify(data)  
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || "Erreur lors de l'ajout.");
+        }
+        const responseData = await response.json();
+        console.log('Succès:', responseData);
+
+        // Afficher la modal 
+        showModal(responseData);
+
+    } catch (error) {
+        console.error('Erreur:', error);
+    }
+}
 
