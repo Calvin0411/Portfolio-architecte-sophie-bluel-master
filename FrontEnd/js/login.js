@@ -53,5 +53,5 @@ document.querySelector('#login form').addEventListener('submit', function (e) {
 });
 
 
-//modale afin de gérer les figures après connexion 
+
 

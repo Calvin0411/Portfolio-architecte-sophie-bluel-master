@@ -262,6 +262,7 @@ margin: auto;
 
 .hidden {
 	display: none;
+	
 }
 
 .banner-connexion {
@@ -301,59 +302,70 @@ margin: auto;
 /* Style pour ma modal */
 
 .containerModals {
-	display: none;
-    
+
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
+    position: absolute;
+	
     justify-content: center;
     align-items: center;
-    z-index: 1000;
-}
+    z-index: 9999;
+	.modalworks {
+		
+		background-color: white;
+		width: 70%; 
+		height: 70%; 
+		max-width: 900px; 
+		max-height: 800px; 
+		padding: 30px;
+		border-radius: 10px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-between;
+		position: relative; 
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+	}
+	/* Style pour X */
+	.modalworks span {
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		cursor: pointer;
+		font-size: 24px; 
+	}
+	.modalworks button {
+		margin-top: 20px;
+		padding: 10px 20px;
+		border: 1px solid #1D6154;
+		border-radius: 25px;
+		font-family: 'Syne';
+		color: #1D6154;
+		cursor: pointer;
+	}
+	.modalworks>*:hover{
+		background-color: #1D6154;
+		color: white;	
+	}
+	
 
-.modalworks {
-    background-color: white;
-    width: 70%; 
-    height: 70%; 
-    max-width: 900px; 
-    max-height: 800px; 
-    padding: 30px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    position: relative; 
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
-
-/* Style pour X */
-.modalworks span {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    cursor: pointer;
-    font-size: 24px; 
-}
-
-
-.modalworks button {
-    margin-top: 20px;
-    padding: 10px 20px;
-	border: 1px solid #1D6154;
-	border-radius: 25px;
-	font-family: 'Syne';
-	color: #1D6154;
-	cursor: pointer;
-}
-.modalworks>*:hover{
-	background-color: #1D6154;
-	color: white;	
-}
-
 
 /*style bouton edit */
 
+.editfigure {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: baseline;
+}
+
+#edit-button {
+    border: none; 
+    outline: none; 
+    box-shadow: none; 
+    background: none; 
+}
