@@ -216,12 +216,17 @@ input[type="submit"]{
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
+	cursor: pointer;
 }
 
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 /* Connection pour ma page login */

@@ -27,7 +27,7 @@ async function login() {
             errorMessage.style.color = "red";
         } else if (response.status === 404) {
             // Erreur 404: Ressource non trouvée
-            errorMessage.textContent = "Erreur: Ressource non trouvée.";
+            errorMessage.textContent = "Erreur: Identifiants non reconnus.";
             errorMessage.style.color = "red";
         } else if (!response.ok) {
             // Autres erreurs

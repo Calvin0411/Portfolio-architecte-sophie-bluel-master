@@ -48,15 +48,22 @@ function displayWorks(data) {
     });
 }
 
+//fonction pour afficher les works dans la modal
+
 function displayWorksInModale(data) {
     const gallery = document.querySelector(".WorksModals");
     gallery.innerHTML="";
     data.forEach(work =>{
         const div = document.createElement("div");
         div.innerHTML = `<img src=${work.imageUrl} alt=${work.title}>
-                        <i class= `;//Logo poubelle
-    })
+                        <i class="fa-solid fa-trash-can" id=${work.id}></i>`;
+        gallery.appendChild(div);        
+    });
 }
+
+//fetch delete (on doit envoyer à l'api un ID (chiffre/nombre))
+//comme on clic sur la poubelle, on donne à la poubelle l'ID du work.
+//elementPoubelle.parentNode.remove
 
 async function getCategories() {
     const url = "http://localhost:5678/api/categories"; 
@@ -69,6 +76,8 @@ async function getCategories() {
         console.error(error.message);  
     }
 }
+
+
 
 getCategories();
 
