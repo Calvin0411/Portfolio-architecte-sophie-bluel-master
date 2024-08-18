@@ -48,6 +48,16 @@ function displayWorks(data) {
     });
 }
 
+function displayWorksInModale(data) {
+    const gallery = document.querySelector(".WorksModals");
+    gallery.innerHTML="";
+    data.forEach(work =>{
+        const div = document.createElement("div");
+        div.innerHTML = `<img src=${work.imageUrl} alt=${work.title}>
+                        <i class= `;//Logo poubelle
+    })
+}
+
 async function getCategories() {
     const url = "http://localhost:5678/api/categories"; 
     try {
@@ -147,19 +157,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Affiche la modal quand on clique sur le bouton "Modifier"
-    editButton.addEventListener('click', () => {
-        modalContainer.classList.remove('hidden');
+    document.getElementById('edit-button').addEventListener('click', () => {
+        document.getElementById('modal-container').style.display = 'flex';
     });
-
-    // Cache la modal quand on clique sur le bouton de fermeture
-    closeModal.addEventListener('click', () => {
-        modalContainer.classList.add('hidden');
+    
+    document.getElementById('close-modal').addEventListener('click', () => {
+        document.getElementById('modal-container').style.display = 'none';
     });
+    
 });
 
 
 // Ajout nouveau travail dans la modale 
+
 
 async function addWork(data) {
     try {
