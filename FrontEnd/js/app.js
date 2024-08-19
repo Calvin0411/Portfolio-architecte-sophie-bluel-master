@@ -52,18 +52,54 @@ function displayWorks(data) {
 
 function displayWorksInModale(data) {
     const gallery = document.querySelector(".WorksModals");
-    gallery.innerHTML="";
-    data.forEach(work =>{
+    gallery.innerHTML = "";
+    
+    data.forEach(work => {
         const div = document.createElement("div");
-        div.innerHTML = `<img src=${work.imageUrl} alt=${work.title}>
-                        <i class="fa-solid fa-trash-can" id=${work.id}></i>`;
-        gallery.appendChild(div);        
+        div.classList.add("modal-work-item"); 
+
+        div.innerHTML = `
+            <img src="${work.imageUrl}" alt="${work.title}">
+            <i class="fa-solid fa-trash-can" id="${work.id}"></i>
+        `;
+
+        gallery.appendChild(div);
+
+        // Ajoute un écouteur sur l'icône de poubelle
+        const trashIcon = div.querySelector('i');
+        trashIcon.addEventListener('click', async () => {
+            await deleteWork(work.id);  // Appelle la fonction de suppression
+            div.remove();  // Supprime l'élément du DOM
+        });
     });
 }
 
-//fetch delete (on doit envoyer à l'api un ID (chiffre/nombre))
-//comme on clic sur la poubelle, on donne à la poubelle l'ID du work.
-//elementPoubelle.parentNode.remove
+async function deleteWork(workId) {
+    try {
+        const response = await fetch(`http://localhost:5678/api/works/${workId}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem('token')}`  
+            }
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || "Erreur lors de la suppression.");
+        }
+
+        console.log(`Work with ID ${workId} has been deleted.`);
+    } catch (error) {
+        console.error('Erreur:', error);
+    }
+}
+
+document.getElementById('edit-button').addEventListener('click', () => {
+    document.getElementById('modal-container').style.display = 'flex';
+    displayWorksInModale(worksData);  // Appelle la fonction pour afficher les travaux
+});
+
+
 
 async function getCategories() {
     const url = "http://localhost:5678/api/categories"; 

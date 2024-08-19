@@ -368,7 +368,7 @@ h3{
 }
 
 .modalworks button {
-    margin-top: 500px;
+    margin-top: auto;
     padding: 10px 20px;
     border: 1px solid #1D6154;
     border-radius: 25px;
@@ -382,6 +382,12 @@ h3{
     color: white;
 }
 
+.line {
+	height: 1px; 
+	background-color: #B3B3B3; 
+	margin: 20px ; 
+}
+
 
 #edit-button {
     border: none; 
@@ -389,4 +395,44 @@ h3{
     box-shadow: none; 
     background: none; 
 	cursor: pointer;
+}
+
+/* Style pour intérieur modal*/
+
+.WorksModals {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 10px; 
+}
+
+.WorksModals img {
+    width: 100%; 
+    height: auto; 
+}
+
+.WorksModals .fa-trash-can {
+    background-color: black; 
+    color: white; 
+    padding: 5px; 
+    border-radius: 2px; 
+    display: inline-block;
+    cursor: pointer; 
+    font-size: 15px;
+}
+
+
+.WorksModals div {
+    position: relative; 
+    display: inline-block;
+}
+
+.WorksModals .fa-trash-can {
+    position: absolute; 
+    top: 10px; 
+    right: 10px; 
+}
+
+
+.modalworks h3 {
+    margin-bottom: 50px;
 }
