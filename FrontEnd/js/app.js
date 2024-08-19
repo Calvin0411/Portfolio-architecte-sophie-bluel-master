@@ -190,6 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const editButton = document.getElementById('edit-button');
     const modalContainer = document.getElementById('modal-container');
     const closeModal = document.getElementById('close-modal');
+    const modalContent = document.querySelector('.modalworks');
 
     // Gestion du bouton de connexion/déconnexion
     authButton.addEventListener('click', (e) => {
@@ -202,15 +203,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    document.getElementById('edit-button').addEventListener('click', () => {
-        document.getElementById('modal-container').style.display = 'flex';
+    editButton.addEventListener('click', () => {
+        modalContainer.style.display = 'flex';
     });
     
-    document.getElementById('close-modal').addEventListener('click', () => {
-        document.getElementById('modal-container').style.display = 'none';
+    closeModal.addEventListener('click', () => {
+        modalContainer.style.display = 'none';
     });
-    
+
+    // Ferme la modale quand on clique en dehors de celle-ci
+    window.addEventListener('click', (event) => {
+        if (event.target == modalContainer) {
+            modalContainer.style.display = 'none';
+        }
+    });
 });
+
 
 
 // Ajout nouveau travail dans la modale 
