@@ -1,24 +1,7 @@
-// Fonction pour vérifier la connexion de l'utilisateur
-function checkUserLogin() {
-    // Récupère le token du localStorage
-    const token = localStorage.getItem('token');
-    // Sélectionne la div "Mode Édition"
-    const editModeDiv = document.querySelector('.banner-connexion');
-
-    // Si le token est présent, affiche la div, sinon la cache
-    if (token) {
-        editModeDiv.classList.remove('hidden');
-    } else {
-        editModeDiv.classList.add('hidden');
-    }
-}
-
-// Appelle la fonction au chargement de la page
-document.addEventListener('DOMContentLoaded', checkUserLogin);
-
-// Code pour la galerie, filtre et login
-
 console.log("Hello Worlds");
+
+// Code pour afficher la galerie, filtre et login;
+//Affichagge de mes Works :
 
 async function getWorks() {
     const url = "http://localhost:5678/api/works";
@@ -60,8 +43,7 @@ function displayWorksInModale(data) {
 
         div.innerHTML = `
             <img src="${work.imageUrl}" alt="${work.title}">
-            <i class="fa-solid fa-trash-can" id="${work.id}"></i>
-        `;
+            <i class="fa-solid fa-trash-can" id="${work.id}"></i>`;
 
         gallery.appendChild(div);
 
@@ -220,9 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-
 // Ajout nouveau travail dans la modale 
-
 
 async function addWork(data) {
     try {

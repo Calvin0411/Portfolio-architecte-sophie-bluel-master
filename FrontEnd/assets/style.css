@@ -51,6 +51,7 @@ a {
 	text-decoration: none;
 	color: black;
 	font: Work Sans;
+	font-size: 1.2em;
 }
 
 a:hover {
@@ -436,3 +437,4 @@ h3{
 .modalworks h3 {
     margin-bottom: 50px;
 }
+
