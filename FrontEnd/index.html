@@ -11,6 +11,9 @@
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="https://kit.fontawesome.com/63df4d3d8b.js" crossorigin="anonymous"></script>
 	<script src="../FrontEnd/js/app.js" defer></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
 	<div class="banner-connexion hidden">
@@ -71,6 +74,8 @@
 		</ul>
 	</nav>
 </footer>
+<!--DIV pour supprimer les works -->
+
 <div id="modal-container" class="containerModals">
     <div class="modalworks">
         <span id="close-modal">&times;</span>
@@ -78,6 +83,27 @@
         <div class="WorksModals"></div>
 		<div class="line"></div>
         <button>Ajouter une photo</button>
+    </div>
+</div>
+<!--DIV pour ajouter les works -->
+<div id="second-modal" class="modal ">
+    <div class="add-works">
+		<div class="header-second-modal">
+        	<span><i class="fa-solid fa-arrow-left"></i></span>
+			<span><i class="fa-solid fa-xmark"></i></span>
+		</div>
+		<h3>Ajout photo</h3>
+		<div class="box-add-works">
+			<i class="fa-regular fa-image"></i>
+			<button class="add-photo-btn">+ Ajouter photo</button>
+			<p>jpg, png : 4mo max</p>
+		</div>
+		<h4>Titre</h4>
+		<input type="text">
+		<h4>Catégorie</h4>
+		<input type="text">
+		<div class="line"></div>
+		<button class="valid">Valider</button>
     </div>
 </div>
 </body>

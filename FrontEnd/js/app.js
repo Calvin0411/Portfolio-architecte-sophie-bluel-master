@@ -225,6 +225,8 @@ async function addWork(data) {
         console.error('Erreur:', error);
     }
 }
+
+
 // Fonction pour afficher les détails dans la modal
 async function addWork(data) {
     try {
