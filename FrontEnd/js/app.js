@@ -254,3 +254,59 @@ async function addWork(data) {
     }
 }
 
+
+// Sélectionne le bouton "Ajouter une photo" dans la première modal
+const openSecondModalButton = document.getElementById('open-second-modal');
+
+// Sélectionne la première modal et la deuxième modal
+const firstModal = document.getElementById('modal-container');
+const secondModal = document.getElementById('second-modal');
+
+// Ajoute un écouteur d'événement pour le clic sur le bouton "Ajouter une photo"
+openSecondModalButton.addEventListener('click', function() {
+    // Cache la première modal
+    firstModal.style.display = 'none';
+
+    // Affiche la deuxième modal
+    secondModal.classList.remove('hidden');
+    secondModal.style.display = 'block';
+});
+
+
+// Ouvrir la deuxième modal
+document.getElementById('open-second-modal').addEventListener('click', function() {
+    document.getElementById('modal-container').classList.add('hidden');
+    document.getElementById('second-modal').classList.remove('hidden');
+});
+
+// Fermer la deuxième modal avec la croix
+document.getElementById('close-second-modal').addEventListener('click', function() {
+    document.getElementById('second-modal').classList.add('hidden');
+});
+
+// Revenir à la première modal avec la flèche
+document.getElementById('go-back').addEventListener('click', function() {
+    document.getElementById('second-modal').classList.add('hidden');
+    document.getElementById('modal-container').classList.remove('hidden');
+});
+
+// Gestion navigation de ma deuxième nav
+
+const closeSecondModalButton = document.getElementById('close-second-modal');
+const goBackButton = document.getElementById('go-back');
+
+// Fonction pour ouvrir la deuxième modal
+function openSecondModal() {
+    firstModal.style.display = 'none'; // Cache la première modal
+    secondModal.style.display = 'block'; // Affiche la deuxième modal
+}
+
+// Fonction pour fermer la deuxième modal
+function closeSecondModal() {
+    secondModal.style.display = 'none'; // Cache la deuxième modal
+    firstModal.style.display = 'block'; // Affiche la première modal
+}
+
+openSecondModalButton.addEventListener('click', openSecondModal);
+closeSecondModalButton.addEventListener('click', closeSecondModal);
+goBackButton.addEventListener('click', closeSecondModal);

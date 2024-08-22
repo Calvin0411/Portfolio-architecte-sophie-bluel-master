@@ -276,13 +276,14 @@ margin: auto;
     position: relative; 
     left: 50%;
     transform: translateX(-50%);
+
 }
 
 .banner-connexion p {
 	gap: 15px;
 	color: white;
 	font-size: 20px;
-	padding-top: 15px;
+	padding-top: 20px;
 	display: flex;
 	justify-content: center;
 }
@@ -322,6 +323,7 @@ h3{
 	font-size: 26px;
 	font-weight: 400;
 	color: black;
+	margin-top: 25px;
 	margin-bottom: 50px;
 }
 
@@ -361,15 +363,19 @@ h3{
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-.modalworks span {
-    position: absolute;
-    top: 20px;
+
+
+.modalworks .close-button{
+	background-color: white;
+    border: none;
+    font-size: 21px; 
+    cursor: pointer; 
+    position: absolute; 
+    top: 15px;
     right: 20px;
-    cursor: pointer;
-    font-size: 24px; 
 }
 
-.modalworks button {
+.ajouter button {
     margin-top: auto;
     padding: 10px 20px;
     border: 1px solid #1D6154;
@@ -379,7 +385,7 @@ h3{
     cursor: pointer;
 }
 
-.modalworks button:hover {
+.ajouter button:hover {
     background-color: #1D6154;
     color: white;
 }
@@ -448,7 +454,7 @@ h3{
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 9999999;
-    display: block; 
+    
 }
 
 .modal {
@@ -477,22 +483,13 @@ h3{
 }
 
 .header-second-modal {
-    position: relative;
-	margin-bottom: 30px;
-}
-
-.header-second-modal span:last-child {
-    position: absolute;
-    right: 20px;
-    cursor: pointer;
-    font-size: 21px;
-}
-
-.header-second-modal span:first-child {
-    position: absolute;
-    left: 20px;
-    cursor: pointer;
-    font-size: 21px;
+    display: flex;
+	justify-content: space-between;
+	border: none;
+	button{
+		background-color: white;
+		font-size: 21px;
+	}
 }
 
 .box-add-works {
@@ -574,3 +571,4 @@ h3{
 .valid:hover {
     background-color: #1D6154; 
 }
+

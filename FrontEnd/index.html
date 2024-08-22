@@ -78,19 +78,27 @@
 
 <div id="modal-container" class="containerModals">
     <div class="modalworks">
-        <span id="close-modal">&times;</span>
+        <button id="close-modal" aria-label="Fermer" class="close-button">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
         <h3>Galerie Photo</h3>
         <div class="WorksModals"></div>
-		<div class="line"></div>
-        <button>Ajouter une photo</button>
+			<div class="line"></div>
+				<div class="ajouter">
+        			<button id="open-second-modal" class="ajouter" >Ajouter une photo</button>
+		    	</div>
     </div>
 </div>
 <!--DIV pour ajouter les works -->
-<div id="second-modal" class="modal ">
+<div id="second-modal" class="modal hidden">
     <div class="add-works">
 		<div class="header-second-modal">
-        	<span><i class="fa-solid fa-arrow-left"></i></span>
-			<span><i class="fa-solid fa-xmark"></i></span>
+			<button id="go-back" aria-label="Retour">
+				<i class="fa-solid fa-arrow-left"></i>
+			</button>
+			<button id="close-second-modal" aria-label="Fermer">
+				<i class="fa-solid fa-xmark"></i>
+			</button>
 		</div>
 		<h3>Ajout photo</h3>
 		<div class="box-add-works">
