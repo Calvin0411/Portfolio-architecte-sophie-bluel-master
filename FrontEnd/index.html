@@ -104,15 +104,19 @@
 		<h3>Ajout photo</h3>
 		<div class="box-add-works">
 			<i class="fa-regular fa-image"></i>
-			<button class="add-photo-btn">+ Ajouter photo</button>
+			<div class="custom-file-upload">
+				<button type="button" id="upload-button">+ Ajouter photo</button>
+				<input type="file" id="file-input" style="display: none;">
+				<span id="file-name"></span>
+			</div>
 			<p>jpg, png : 4mo max</p>
 		</div>
 		<h4>Titre</h4>
-		<input type="text">
+		<input type="text" id="work-title" required>
 		<h4>Catégorie</h4>
-		<input type="text">
+		<select id="category-select" required></select>
 		<div class="line"></div>
-		<button class="valid">Valider</button>
+		<button id="submit-work" class="valid">Valider</button>
     </div>
 </div>
 </body>

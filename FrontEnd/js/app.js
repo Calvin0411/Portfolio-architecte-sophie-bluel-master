@@ -317,3 +317,38 @@ window.addEventListener('click', (event) => {
 openSecondModalButton.addEventListener('click', openSecondModal);
 closeSecondModalButton.addEventListener('click', closeSecondModal);
 goBackButton.addEventListener('click', closeSecondModal);
+
+//gère la selection d'un fichier
+
+document.getElementById('upload-button').addEventListener('click', function() {
+    document.getElementById('file-input').click();
+});
+
+document.getElementById('file-input').addEventListener('change', function() {
+    
+    document.getElementById('file-name').textContent = fileName;
+});
+
+
+// Affiche mes catégories dans select
+
+async function selectCategories() {
+    try {
+        const response = await fetch("http://localhost:5678/api/categories");
+        const categories = await response.json();
+
+        const categorySelect = document.getElementById('category-select');
+        categorySelect.innerHTML = "";  
+
+        categories.forEach(category => {
+            const option = document.createElement('option');
+            option.value = category.id;
+            option.textContent = category.name;
+            categorySelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Erreur lors du chargement des catégories:', error);
+    }
+}
+
+selectCategories();
