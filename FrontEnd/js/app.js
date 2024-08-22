@@ -246,7 +246,7 @@ async function addWork(data) {
         const responseData = await response.json();
         console.log('Succès:', responseData);
 
-        // Afficher la modal 
+        // Affiche la modal 
         showModal(responseData);
 
     } catch (error) {
@@ -273,22 +273,23 @@ openSecondModalButton.addEventListener('click', function() {
 });
 
 
-// Ouvrir la deuxième modal
+// Ouvre la deuxième modal
 document.getElementById('open-second-modal').addEventListener('click', function() {
-    document.getElementById('modal-container').classList.add('hidden');
-    document.getElementById('second-modal').classList.remove('hidden');
+    document.getElementById('modal-container').style.display = 'none'; // Cache la première modal
+    document.getElementById('second-modal').style.display = 'block'; // Affiche la deuxième modal
 });
 
-// Fermer la deuxième modal avec la croix
+// Ferme la deuxième modal avec la croix
 document.getElementById('close-second-modal').addEventListener('click', function() {
-    document.getElementById('second-modal').classList.add('hidden');
+    document.getElementById('second-modal').style.display = 'none'; // Cache la deuxième modal
 });
 
-// Revenir à la première modal avec la flèche
+// Reviens à la première modal avec la flèche
 document.getElementById('go-back').addEventListener('click', function() {
-    document.getElementById('second-modal').classList.add('hidden');
-    document.getElementById('modal-container').classList.remove('hidden');
+    document.getElementById('second-modal').style.display = 'none'; // Cache la deuxième modal
+    document.getElementById('modal-container').style.display = 'flex'; // Affiche la première modal
 });
+
 
 // Gestion navigation de ma deuxième nav
 
@@ -303,9 +304,15 @@ function openSecondModal() {
 
 // Fonction pour fermer la deuxième modal
 function closeSecondModal() {
-    secondModal.style.display = 'none'; // Cache la deuxième modal
-    firstModal.style.display = 'block'; // Affiche la première modal
+    secondModal.style.display = 'none'; // Cache la deuxième modal  
 }
+
+// Ferme la modale quand on clique en dehors de celle-ci
+window.addEventListener('click', (event) => {
+    if (event.target == modalContainer) {
+        secondModal.style.display = 'none'; // Cache la deuxième modal
+    }
+});
 
 openSecondModalButton.addEventListener('click', openSecondModal);
 closeSecondModalButton.addEventListener('click', closeSecondModal);
