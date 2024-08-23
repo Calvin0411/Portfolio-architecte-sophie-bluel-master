@@ -55,6 +55,7 @@ function displayWorksInModale(data) {
         });
     });
 }
+//Fonction pour afficher works dans modal 
 
 async function deleteWork(workId) {
     try {
@@ -82,7 +83,7 @@ document.getElementById('edit-button').addEventListener('click', () => {
 });
 
 
-
+//fonction pour récupérer les catégories
 async function getCategories() {
     const url = "http://localhost:5678/api/categories"; 
     try {
@@ -98,6 +99,8 @@ async function getCategories() {
 
 
 getCategories();
+
+//fonction pour afficher les catégories
 
 function displayCategories(data) {
     const categoriesContainer = document.querySelector(".categoriesContainer");  
@@ -130,14 +133,7 @@ function filterWorksByCategory(categoryId) {
 
 filterWorksByCategory();
 
-document.addEventListener('DOMContentLoaded', () => {
-    checkUserLogin();
-    
-    const logoutButton = document.querySelector('#logout');
-    if (logoutButton) {
-        logoutButton.addEventListener('click', logout);
-    }
-});
+
 
 // Fonction pour vérifier la connexion de l'utilisateur
 function checkUserLogin() {
@@ -156,6 +152,15 @@ function checkUserLogin() {
         editButton.classList.add('hidden'); // Cache le bouton "Modifier"
     }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    checkUserLogin();
+    
+    const logoutButton = document.querySelector('#logout');
+    if (logoutButton) {
+        logoutButton.addEventListener('click', logout);
+    }
+});
 
 // Fonction pour gérer la déconnexion
 function logout() {
@@ -273,16 +278,8 @@ openSecondModalButton.addEventListener('click', function() {
 });
 
 
-// Ouvre la deuxième modal
-document.getElementById('open-second-modal').addEventListener('click', function() {
-    document.getElementById('modal-container').style.display = 'none'; // Cache la première modal
-    document.getElementById('second-modal').style.display = 'block'; // Affiche la deuxième modal
-});
+// Gestion navigation de ma deuxième nav
 
-// Ferme la deuxième modal avec la croix
-document.getElementById('close-second-modal').addEventListener('click', function() {
-    document.getElementById('second-modal').style.display = 'none'; // Cache la deuxième modal
-});
 
 // Reviens à la première modal avec la flèche
 document.getElementById('go-back').addEventListener('click', function() {
@@ -291,7 +288,6 @@ document.getElementById('go-back').addEventListener('click', function() {
 });
 
 
-// Gestion navigation de ma deuxième nav
 
 const closeSecondModalButton = document.getElementById('close-second-modal');
 const goBackButton = document.getElementById('go-back');
@@ -309,7 +305,7 @@ function closeSecondModal() {
 
 // Ferme la modale quand on clique en dehors de celle-ci
 window.addEventListener('click', (event) => {
-    if (event.target == modalContainer) {
+    if (event.target == secondModal) {
         secondModal.style.display = 'none'; // Cache la deuxième modal
     }
 });
@@ -325,7 +321,6 @@ document.getElementById('upload-button').addEventListener('click', function() {
 });
 
 document.getElementById('file-input').addEventListener('change', function() {
-    
     document.getElementById('file-name').textContent = fileName;
 });
 
