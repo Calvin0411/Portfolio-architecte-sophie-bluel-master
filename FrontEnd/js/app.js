@@ -207,47 +207,36 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// Ajout nouveau travail dans la modale 
-
+// Fonction pour créer works depuis dans la modal
 async function addWork(data) {
+
+    const token = localStorage.getItem('token');
+
+    const image = document.querySelector('#file-input').files[0]
+    const title = document.querySelector("#work-title").value;
+    const category = document.querySelector ('#category-select').value;
+
+    // Création du form data
+    const formData = new FormData();
+    formData.append('image', image);
+    formData.append('title', title);
+    formData.append('category', category);
+    
     try {
         const response = await fetch("http://localhost:5678/api/works", {
             method: "POST",  
             headers: {
-                "Content-Type": "application/json",  
-                "Authorization": `Bearer ${localStorage.getItem('token')}`  
+                
+                "Authorization": `Bearer ${token}` 
             },
-            body: JSON.stringify(data)  // Convertit les données en chaîne JSON
+            body: formData  
         });
 
         if (!response.ok) {
             const errorData = await response.json();
             throw new Error(errorData.message || "Erreur lors de l'ajout.");
         }
-        const responseData = await response.json();
-        console.log('Succès:', responseData);
-    } catch (error) {
-        console.error('Erreur:', error);
-    }
-}
 
-
-// Fonction pour afficher les détails dans la modal
-async function addWork(data) {
-    try {
-        const response = await fetch("http://localhost:5678/api/works", {
-            method: "POST",  
-            headers: {
-                "Content-Type": "application/json",  
-                "Authorization": `Bearer ${localStorage.getItem('token')}`  
-            },
-            body: JSON.stringify(data)  
-        });
-
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || "Erreur lors de l'ajout.");
-        }
         const responseData = await response.json();
         console.log('Succès:', responseData);
 
@@ -259,6 +248,10 @@ async function addWork(data) {
     }
 }
 
+document.getElementById('submit-work').addEventListener('click', async (e) => {
+    e.preventDefault();
+    await addWork();
+});
 
 // Sélectionne le bouton "Ajouter une photo" dans la première modal
 const openSecondModalButton = document.getElementById('open-second-modal');
