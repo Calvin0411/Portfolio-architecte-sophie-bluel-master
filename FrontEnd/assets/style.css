@@ -577,6 +577,23 @@ h3{
     display: inline-block;
 }
 
+.box-add-works {
+    position: relative;
+    height: 200px;
+    border: 2px dashed #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+    overflow: hidden;
+}
+
+.box-add-works img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
 #upload-button {
     font-family: Work Sans;
 	font-size: 16px;

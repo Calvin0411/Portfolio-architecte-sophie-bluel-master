@@ -340,3 +340,7 @@ async function selectCategories() {
 }
 
 selectCategories();
+
+document.getElementById('file-input').addEventListener('change', function(event) {
+    let previewImage = document.getElementById('previewImage');
+});
