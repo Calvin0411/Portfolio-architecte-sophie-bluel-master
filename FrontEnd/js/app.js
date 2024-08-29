@@ -342,5 +342,22 @@ async function selectCategories() {
 selectCategories();
 
 document.getElementById('file-input').addEventListener('change', function(event) {
-    let previewImage = document.getElementById('previewImage');
+    const file = event.target.files[0];
+    const previewImage = document.getElementById('previewImage');
+    const boxAddWorks = document.querySelector('.box-add-works');
+
+    if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            previewImage.src = e.target.result;
+            previewImage.style.display = 'block';  
+            boxAddWorks.querySelector('i').style.display = 'none';  
+            boxAddWorks.querySelector('.custom-file-upload').style.display = 'none'; 
+            boxAddWorks.querySelector('p').style.display = 'none'; 
+        }
+
+        reader.readAsDataURL(file);
+    }
 });
+
