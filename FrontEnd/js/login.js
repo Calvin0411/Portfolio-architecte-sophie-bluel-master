@@ -27,7 +27,7 @@ async function login() {
             errorMessage.style.color = "red";
         } else if (response.status === 404) {
             // Erreur 404: Ressource non trouvée
-            errorMessage.textContent = "Erreur: Identifiants non reconnus.";
+            errorMessage.textContent = "Erreur: Email ou mot de passe incorrect.";
             errorMessage.style.color = "red";
         } else if (!response.ok) {
             // Autres erreurs

@@ -605,7 +605,8 @@ h3{
 }
 
 #upload-button:hover {
-    background-color: pink;
+    background-color: #1D6154;
+	color: white;
 }
 
 #file-name {

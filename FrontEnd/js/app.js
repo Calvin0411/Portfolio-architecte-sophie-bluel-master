@@ -20,9 +20,11 @@ getWorks();
 
 let worksData = [];  // Variable pour stocker les données des travaux
 
+//fonction pour afficher les works dans ma page
+
 function displayWorks(data) {
     const gallery = document.querySelector(".gallery");  
-    gallery.innerHTML = "";  // Efface le contenu précédent de la galerie
+    gallery.innerHTML = "";  // Efface le contenu précédent de la galerie au changement 
     data.forEach(work => {  // Pour chaque travail dans les données fournies
         const figure = document.createElement("figure");  // Crée un nouvel élément figure
         figure.innerHTML = `<img src=${work.imageUrl} alt=${work.title}>
@@ -55,7 +57,7 @@ function displayWorksInModale(data) {
         });
     });
 }
-//Fonction pour afficher works dans modal 
+//Fonction pour supprimer works dans modal 
 
 async function deleteWork(workId) {
     try {
@@ -84,6 +86,7 @@ document.getElementById('edit-button').addEventListener('click', () => {
 
 
 //fonction pour récupérer les catégories
+
 async function getCategories() {
     const url = "http://localhost:5678/api/categories"; 
     try {
@@ -105,12 +108,12 @@ getCategories();
 function displayCategories(data) {
     const categoriesContainer = document.querySelector(".categoriesContainer");  
 
-    // Ajout du bouton tous
+    // Ajout du bouton "Tous"
     const allButton = document.createElement("div");  // Crée une div pour le bouton 
     allButton.textContent = "Tous";  // nom du bouton
     allButton.dataset.id = "all";  // Ajoute attribut data-id avec la valeur "all" pour le bouton
     allButton.addEventListener("click", () => displayWorks(worksData));  // écouteur d'évènement
-    categoriesContainer.appendChild(allButton);  // Ajoute le bouton tous
+    categoriesContainer.appendChild(allButton);  // Ajoute le bouton "Tous"
 
     // Ajout des boutons pour le filtre
     data.forEach(category => {  
@@ -141,15 +144,19 @@ function checkUserLogin() {
     const editModeDiv = document.querySelector('.banner-connexion');
     const editButton = document.getElementById('edit-button');
     const authButton = document.getElementById('auth-button');
+    const modalContainer = document.getElementById('modal-container');
+    const categoriesContainer = document.querySelector('.categoriesContainer');
 
     if (token) {
         authButton.textContent = "logout";
         editModeDiv.classList.remove('hidden'); // Affiche la bannière "Mode édition"
         editButton.classList.remove('hidden'); // Affiche le bouton "Modifier"
+        categoriesContainer.classList.add('hidden'); // Cache les catégories
     } else {
         authButton.textContent = "login";
         editModeDiv.classList.add('hidden'); // Cache la bannière
         editButton.classList.add('hidden'); // Cache le bouton "Modifier"
+        categoriesContainer.classList.remove('hidden'); // Affiche les catégories
     }
 }
 
@@ -169,7 +176,8 @@ function logout() {
     window.location.href = '/FrontEnd/index.html';  // Redirige vers la page d'accueil
 }
 
-// Initialisation au chargement de la page
+// Initialisation au chargement de la page pour les modals
+
 document.addEventListener('DOMContentLoaded', () => {
     checkUserLogin();
 
@@ -207,11 +215,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// Fonction pour créer works depuis dans la modal
+// Fonction pour ajouter works depuis dans la modal
 async function addWork(data) {
 
     const token = localStorage.getItem('token');
-
     const image = document.querySelector('#file-input').files[0]
     const title = document.querySelector("#work-title").value;
     const category = document.querySelector ('#category-select').value;
@@ -360,4 +367,3 @@ document.getElementById('file-input').addEventListener('change', function(event)
         reader.readAsDataURL(file);
     }
 });
-
