@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function logout() {
     localStorage.removeItem('token');  // Supprime le token
     checkUserLogin();  // Met à jour l'interface après déconnexion
-    window.location.href = '/FrontEnd/index.html';  // Redirige vers la page d'accueil
+    window.location.href = './index.html';  // Redirige vers la page d'accueil
 }
 
 // Initialisation au chargement de la page pour les modals
@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (localStorage.getItem('token')) {
             logout();
         } else {
-            window.location.href = '/FrontEnd/login.html';
+            window.location.href = './login.html';
         }
     });
 
@@ -246,10 +246,7 @@ async function addWork(data) {
 
         const responseData = await response.json();
         console.log('Succès:', responseData);
-
-        // Affiche la modal 
-        showModal(responseData);
-
+        
     } catch (error) {
         console.error('Erreur:', error);
     }

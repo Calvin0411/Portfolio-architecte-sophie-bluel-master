@@ -36,7 +36,7 @@ async function login() {
         } else {
             // Connexion réussie
             localStorage.setItem('token', dataUser.token);  // Sauvegarde le token dans le localStorage
-            window.location.href = "/FrontEnd/index.html";  // Redirige vers la page d'accueil après connexion
+            window.location.href = "./index.html";  // Redirige vers la page d'accueil après connexion
         }
     } catch (error) {
         // Gère les erreurs de réseau ou de traitement
